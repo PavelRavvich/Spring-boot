@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="UTF-8">
-    <title>all items</title>
+    <meta charset="UTF-8" />
+    <title>login</title>
 </head>
 <body>
+<form th:action="@{/get_all_items}" method="post">
+    <div><input type="text" name="name" /></div>
 
+</form>
 </body>
 </html>
