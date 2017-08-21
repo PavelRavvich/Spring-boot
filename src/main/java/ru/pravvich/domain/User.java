@@ -24,10 +24,19 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "role_id")
-    private int roleId;
-
-    @Transient
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_id_role_id",
+            joinColumns = {
+                    @JoinColumn(name = "user_id",
+                            nullable = false,
+                            updatable = false)
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "role_id",
+                            nullable = false,
+                            updatable = false)
+            }
+    )
     private List<Role> authorities;
 
     @Column(name = "account_non_expired")
@@ -47,7 +56,6 @@ public class User implements UserDetails {
 
     public User(String username,
                 String password,
-                int roleId,
                 List<Role> authorities,
                 boolean accountNonExpired,
                 boolean accountNonLocked,
@@ -55,7 +63,6 @@ public class User implements UserDetails {
                 boolean enabled) {
         this.username = username;
         this.password = password;
-        this.roleId = roleId;
         this.authorities = authorities;
         this.accountNonExpired = accountNonExpired;
         this.accountNonLocked = accountNonLocked;
@@ -87,14 +94,6 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
     }
 
     @Override
@@ -150,7 +149,6 @@ public class User implements UserDetails {
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (roleId != user.roleId) return false;
         if (accountNonExpired != user.accountNonExpired) return false;
         if (accountNonLocked != user.accountNonLocked) return false;
         if (credentialsNonExpired != user.credentialsNonExpired) return false;
@@ -164,7 +162,6 @@ public class User implements UserDetails {
         int result = id;
         result = 31 * result + username.hashCode();
         result = 31 * result + password.hashCode();
-        result = 31 * result + roleId;
         result = 31 * result + (accountNonExpired ? 1 : 0);
         result = 31 * result + (accountNonLocked ? 1 : 0);
         result = 31 * result + (credentialsNonExpired ? 1 : 0);
@@ -178,7 +175,6 @@ public class User implements UserDetails {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", roleId=" + roleId +
                 ", accountNonExpired=" + accountNonExpired +
                 ", accountNonLocked=" + accountNonLocked +
                 ", credentialsNonExpired=" + credentialsNonExpired +
