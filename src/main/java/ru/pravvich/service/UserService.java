@@ -21,24 +21,10 @@ import java.util.List;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private RoleRepository roleRepo;
-
-    @Autowired
     private UserRepository userRepo;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
-        final User user = userRepo.findByUsername(username);
-
-        final Role role = roleRepo.findOne(user.getRoleId());
-
-        final List<Role> authorities = new ArrayList<>();
-
-        authorities.add(role);
-
-        user.setAuthorities(authorities);
-
-        return user;
+        return userRepo.findByUsername(username);
     }
 }
