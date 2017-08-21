@@ -1,21 +1,23 @@
 package ru.pravvich.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Author : Pavel Ravvich.
  * Created : 18.08.17.
  */
-@Entity
+@Entity(name = "items")
 public class Item {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "author")
+    private int author;
 
     public Item() {
     }
@@ -36,6 +38,14 @@ public class Item {
         this.name = name;
     }
 
+    public int getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,6 +54,7 @@ public class Item {
         Item item = (Item) o;
 
         if (id != item.id) return false;
+        if (author != item.author) return false;
         return name.equals(item.name);
     }
 
@@ -51,6 +62,7 @@ public class Item {
     public int hashCode() {
         int result = id;
         result = 31 * result + name.hashCode();
+        result = 31 * result + author;
         return result;
     }
 
