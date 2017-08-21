@@ -26,15 +26,16 @@ public class ItemController {
     }
 
     @GetMapping("/get_all_items")
-    public ModelAndView getAllItems() {
+    public String getAllItems() {
 
-        final ModelAndView model = new ModelAndView();
-
-        final List<Item> all = service.getAll();
-
-        model.addObject("items", all);
-
-        return model;
+//        final ModelAndView model = new ModelAndView();
+//
+//        final List<Item> all = service.getAll();
+//
+//        model.addObject("items", all);
+//
+//        return model;
+        return "all_items";
     }
 
     @PostMapping("/add_item")
