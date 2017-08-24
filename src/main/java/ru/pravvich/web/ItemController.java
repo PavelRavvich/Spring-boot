@@ -1,20 +1,15 @@
 package ru.pravvich.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import ru.pravvich.domain.Item;
 import ru.pravvich.domain.User;
 import ru.pravvich.service.ItemService;
-
-import javax.servlet.http.HttpSession;
-import java.security.Principal;
-import java.util.List;
 
 /**
  * Author : Pavel Ravvich.
@@ -55,14 +50,12 @@ public class ItemController {
     }
 
     @PostMapping("/get_all_items/add_item_page/add_item")
-    public String addItem(@RequestParam(value = "description")
-                              final String description,
+    public String addItem(@RequestParam(value = "description") final String description) {
 
-                          final Principal principal) {
-
-        //todo binding Principal context
-
-        final User user = (User)principal;
+        final User user = (User) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
 
         final Item item = new Item();
 
@@ -72,6 +65,6 @@ public class ItemController {
 
         service.add(item);
 
-        return "redirect:get_all_items";
+        return "redirect:/get_all_items";
     }
 }
