@@ -31,4 +31,9 @@ public class ItemServiceImpl implements ItemService {
     public List<Item> getAll() {
         return Lists.newArrayList(repository.findAll());
     }
+
+    @Override
+    public Item getItemById(final int id) {
+        return repository.findOne(id);
+    }
 }

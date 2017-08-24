@@ -36,12 +36,12 @@ INSERT INTO user_id_role_id (user_id, role_id) VALUES ('2', '1');
 
 
 CREATE TABLE IF NOT EXISTS items (
-  id     SERIAL PRIMARY KEY,
-  name   TEXT    NOT NULL,
-  author INTEGER NOT NULL,
-  FOREIGN KEY (author) REFERENCES users (id)
+  id          SERIAL PRIMARY KEY,
+  description TEXT    NOT NULL,
+  author_id     INTEGER NOT NULL,
+  FOREIGN KEY (author_id) REFERENCES users (id)
 );
 
-INSERT INTO items (name, author) VALUES ('description1', '1');
-INSERT INTO items (name, author) VALUES ('description2', '1');
-INSERT INTO items (name, author) VALUES ('description3', '1');
+INSERT INTO items (description, author_id) VALUES ('description1', '1');
+INSERT INTO items (description, author_id) VALUES ('description2', '1');
+INSERT INTO items (description, author_id) VALUES ('description3', '1');

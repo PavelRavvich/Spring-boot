@@ -13,11 +13,17 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "author")
-    private int author;
+    @Column(name = "author_id")
+    private int authorId;
+
+    @ManyToOne()
+    @JoinColumn(name = "author_id", referencedColumnName = "id",
+            insertable = false, updatable = false
+    )
+    private User author;
 
     public Item() {
     }
@@ -30,19 +36,27 @@ public class Item {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDescription() {
+        return description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getAuthor() {
+    public int getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(int authorId) {
+        this.authorId = authorId;
+    }
+
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(int author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 
@@ -54,15 +68,13 @@ public class Item {
         Item item = (Item) o;
 
         if (id != item.id) return false;
-        if (author != item.author) return false;
-        return name.equals(item.name);
+        return description.equals(item.description);
     }
 
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + author;
+        result = 31 * result + description.hashCode();
         return result;
     }
 
@@ -70,7 +82,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

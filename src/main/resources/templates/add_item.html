@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+
+<form th:action="@{/get_all_items/add_item_page/add_item}" method="post">
+    <div><input type="text" name="description" /></div>
+    <div><input type="submit" value="Sign in" /></div>
+</form>
+
+</body>
+</html>

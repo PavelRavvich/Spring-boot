@@ -17,5 +17,11 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
         registry.addViewController("/get_all_items").setViewName("all_items");
 
         registry.addViewController("/login").setViewName("login");
+
+        registry.addViewController("/get_all_items/get_single_item_by_id")
+                .setViewName("single_item");
+
+        registry.addViewController("/get_all_items/add_item_page")
+                .setViewName("add_item");
     }
 }
