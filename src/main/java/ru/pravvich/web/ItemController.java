@@ -60,6 +60,8 @@ public class ItemController {
 
                           final Principal principal) {
 
+        //todo binding Principal context
+
         final User user = (User)principal;
 
         final Item item = new Item();
