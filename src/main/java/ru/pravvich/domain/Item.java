@@ -28,6 +28,11 @@ public class Item {
     public Item() {
     }
 
+    public Item(String description, User author) {
+        this.description = description;
+        this.author = author;
+    }
+
     public int getId() {
         return id;
     }
