@@ -1,17 +1,13 @@
 package ru.pravvich.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.pravvich.domain.MySpringUser;
-import ru.pravvich.domain.Role;
 import ru.pravvich.domain.User;
 import ru.pravvich.repository.UserRepository;
-
-import java.util.List;
 
 /**
  * Author : Pavel Ravvich.
