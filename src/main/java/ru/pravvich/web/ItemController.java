@@ -4,11 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ru.pravvich.domain.Item;
 import ru.pravvich.domain.MySpringUser;
+import ru.pravvich.domain.User;
 import ru.pravvich.service.ItemService;
 
 import java.security.Principal;
@@ -65,5 +64,18 @@ public class ItemController {
         service.add(item);
 
         return "redirect:/get_all_items";
+    }
+
+    @GetMapping("/get_json")
+    public @ResponseBody Item getJson(Principal principal) {
+
+        MySpringUser user = (MySpringUser) ((Authentication) principal)
+                .getPrincipal();
+
+        Item item = new Item();
+        item.setAuthorId(user.getId());
+        item.setDescription("test_description");
+
+        return item;
     }
 }
